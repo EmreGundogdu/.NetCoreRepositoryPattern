@@ -54,9 +54,17 @@ namespace PocketBook.Controllers
             await unitOfWork.Users.Upsert(user);
             await unitOfWork.CompleteAsync();
             return NoContent();
-            {
+        }
 
-            }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var user = await unitOfWork.Users.GetById(id);
+            if (user is null)
+                return BadRequest();
+            await unitOfWork.Users.Delete(id);
+            await unitOfWork.CompleteAsync();
+            return Ok(id);
         }
     }
 }
