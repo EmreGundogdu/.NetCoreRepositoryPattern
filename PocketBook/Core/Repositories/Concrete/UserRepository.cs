@@ -27,5 +27,43 @@ namespace PocketBook.Core.Repositories.Concrete
                 return new List<User();
             }
         }
+        public override async Task<bool> Upsert(User entity)
+        {
+            try
+            {
+                var existingUser = await dbSet.Where(x => x.Id == entity.Id).FirstOrDefaultAsync();
+                if (existingUser != null)
+                {
+                    existingUser.FirstName = entity.FirstName;
+                    existingUser.LastName = entity.LastName;
+                    existingUser.Email = entity.Email;
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "{Repo} upsert method error", typeof(UserRepository));
+                return false;
+            }
+            return await Add(entity);
+        }
+        public async override Task<bool> Delete(Guid id)
+        {
+            try
+            {
+                var existingUser = await dbSet.Where(x => x.Id == id).FirstOrDefaultAsync();
+                if (existingUser is not null)
+                {
+                    dbSet.Remove(existingUser);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "{Repo} delete method error", typeof(UserRepository));
+                return false;
+            }
+        }
     }
 }
