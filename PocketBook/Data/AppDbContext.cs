@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PocketBook.Models;
 
 namespace PocketBook.Data
 {
@@ -8,5 +9,6 @@ namespace PocketBook.Data
         {
 
         }
+        public virtual DbSet<User> Users { get; set; }
     }
 }
