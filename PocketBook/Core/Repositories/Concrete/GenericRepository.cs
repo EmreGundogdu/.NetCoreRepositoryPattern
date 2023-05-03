@@ -15,30 +15,30 @@ namespace PocketBook.Core.Repositories.Concrete
             this.logger = logger;
         }
 
-        public async Task<bool> Add(X entity)
+        public virtual async Task<bool> Add(X entity)
         {
             await dbSet.AddAsync(entity);
             return true;
         }
 
-        public async Task<IEnumerable<X>> All()
+        public virtual async Task<IEnumerable<X>> All()
         {
             return await dbSet.ToListAsync();
         }
 
-        public async Task<bool> Delete(Guid id)
+        public virtual async Task<bool> Delete(Guid id)
         {
             var data = await dbSet.FindAsync(id);
             dbSet.Remove(data);
             return true;
         }
 
-        public async Task<X> GetById(Guid id)
+        public virtual async Task<X> GetById(Guid id)
         {
             return await dbSet.FindAsync(id);
         }
 
-        public Task<bool> Upsert(X entity)
+        public virtual Task<bool> Upsert(X entity)
         {
             throw new NotImplementedException();
         }
