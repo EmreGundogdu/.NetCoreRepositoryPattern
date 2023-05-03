@@ -38,5 +38,25 @@ namespace PocketBook.Controllers
                 return NotFound();
             return Ok(user);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var users = await unitOfWork.Users.All();
+            return Ok(users);
+        }
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Update(Guid id, User user)
+        {
+            if (id != user.Id)
+                return BadRequest();
+            await unitOfWork.Users.Upsert(user);
+            await unitOfWork.CompleteAsync();
+            return NoContent();
+            {
+
+            }
+        }
     }
 }
