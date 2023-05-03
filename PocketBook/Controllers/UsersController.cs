@@ -29,5 +29,14 @@ namespace PocketBook.Controllers
             }
             return new JsonResult("Something wen wrong") { StatusCode = StatusCodes.Status500InternalServerError };
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetItem(Guid id)
+        {
+            var user = await unitOfWork.Users.GetById(id);
+            if (user is null)
+                return NotFound();
+            return Ok(user);
+        }
     }
 }
