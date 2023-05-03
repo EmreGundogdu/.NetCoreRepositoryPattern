@@ -9,10 +9,11 @@ namespace PocketBook.Core.Repositories.Concrete
         protected AppDbContext context;
         protected DbSet<X> dbSet;
         protected readonly ILogger logger;
-        public GenericRepository(AppDbContext context, ILogger logger)
+        public GenericRepository(AppDbContext context, ILogger logger, DbSet<X> dbSet)
         {
             this.context = context;
             this.logger = logger;
+            this.dbSet = context.Set<X>();
         }
 
         public virtual async Task<bool> Add(X entity)
