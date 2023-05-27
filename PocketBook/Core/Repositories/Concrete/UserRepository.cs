@@ -24,7 +24,7 @@ namespace PocketBook.Core.Repositories.Concrete
             catch (Exception ex)
             {
                 logger.LogError(ex, "{Repo} all method error", typeof(UserRepository));
-                return new List<User();
+                return new List<User>();
             }
         }
         public override async Task<bool> Upsert(User entity)

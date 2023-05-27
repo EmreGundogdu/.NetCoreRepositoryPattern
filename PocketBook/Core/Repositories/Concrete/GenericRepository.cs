@@ -9,7 +9,7 @@ namespace PocketBook.Core.Repositories.Concrete
         protected AppDbContext context;
         protected DbSet<X> dbSet;
         protected readonly ILogger logger;
-        public GenericRepository(AppDbContext context, ILogger logger, DbSet<X> dbSet)
+        public GenericRepository(AppDbContext context, ILogger logger)
         {
             this.context = context;
             this.logger = logger;
